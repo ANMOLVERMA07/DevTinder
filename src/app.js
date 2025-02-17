@@ -1,12 +1,17 @@
 const express = require("express");
+const connectDB = require("./config/database.js");
 
 const app = express();
 
-app.use("/test",(req,res) => {
-    res.send("Hello World");
+app.post("/signup",(req,res) => {
+    
 })
 
-app.listen(3000, () => {
-    console.log("Server is successfully listening on port 3000");
-    
-});
+connectDB()
+.then(() => {
+    console.log("MONGODB CONNECTED SUCCESSFULLY")
+    app.listen(3000, () => {
+        console.log("Server is successfully listening on port 3000");
+    });
+})
+.catch((err) => console.log("Database cannot be connected",err));
